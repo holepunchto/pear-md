@@ -1,8 +1,8 @@
-const path = require("bare-path");
+import path from "bare-path";
 
-const { visit } = require("unist-util-visit");
+import { visit } from "unist-util-visit";
 
-module.exports = function rehypeConvertLocalMarkdownLinks() {
+export default function rehypeConvertLocalMarkdownLinks() {
   return (tree) => {
     visit(
       tree,
@@ -21,4 +21,4 @@ module.exports = function rehypeConvertLocalMarkdownLinks() {
       },
     );
   };
-};
+}

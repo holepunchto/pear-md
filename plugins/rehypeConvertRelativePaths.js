@@ -1,5 +1,5 @@
-const path = require("bare-path");
-const { visit } = require("unist-util-visit");
+import path from "bare-path";
+import { visit } from "unist-util-visit";
 
 const URL_ATTRIBUTES = ["src", "srcSet", "href"];
 
@@ -9,7 +9,7 @@ const URL_ATTRIBUTES = ["src", "srcSet", "href"];
  * @param {object} opts
  * @param {string} opts.root
  */
-module.exports = function rehypeConvertRelativePaths(opts = {}) {
+export default function rehypeConvertRelativePaths(opts = {}) {
   const { root } = opts;
   return (tree) => {
     visit(
@@ -28,4 +28,4 @@ module.exports = function rehypeConvertRelativePaths(opts = {}) {
       },
     );
   };
-};
+}

@@ -5,13 +5,15 @@
   "license": "Apache-2.0",
   "author": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "bare test/index.js",
     "test:gen": "brittle -r test/index.js test/*.test.js"
   },
   "exports": {
     ".": {
-      "default": "./index.js"
+      "default": "./index.js",
+      "rehypeConvertRelativePaths": "./plugins/rehypeConvertRelativePaths.js"
     },
     "./package": "./package.json"
   },
@@ -65,6 +67,7 @@
     "hastscript": "^9.0.1",
     "raw": "^0.1.4",
     "rehype": "^13.0.2",
+    "rehype-format": "^5.0.1",
     "rehype-pretty-code": "^0.14.1",
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",

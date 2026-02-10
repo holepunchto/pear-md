@@ -1,12 +1,12 @@
-const { SKIP, visit } = require("unist-util-visit");
-const { headingRank } = require("hast-util-heading-rank");
-const { h } = require("hastscript");
+import { SKIP, visit } from "unist-util-visit";
+import { headingRank } from "hast-util-heading-rank";
+import { h } from "hastscript";
 
 /**
  * Gives all headings clickable links to their corresponding anchor tags
  * (Note: this does NOT set heading ids and is only needed when rendering a page)
  */
-module.exports = function rehypeHeadingLinks() {
+export default function rehypeHeadingLinks() {
   return (tree) => {
     visit(
       tree,
@@ -24,4 +24,4 @@ module.exports = function rehypeHeadingLinks() {
       },
     );
   };
-};
+}

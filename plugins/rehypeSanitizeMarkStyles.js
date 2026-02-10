@@ -1,10 +1,10 @@
-const { visit } = require("unist-util-visit");
+import { visit } from "unist-util-visit";
 
 /**
  * Ensures the only style we're allowed to add to "mark" elements is
  * "background-color" set to a hex code (strips all other mark style attributes)
  */
-module.exports = function rehypeSanitizeMarkStyles() {
+export default function rehypeSanitizeMarkStyles() {
   return (tree) => {
     visit(
       tree,
@@ -21,4 +21,4 @@ module.exports = function rehypeSanitizeMarkStyles() {
       },
     );
   };
-};
+}

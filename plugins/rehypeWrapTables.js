@@ -1,10 +1,10 @@
-const { selectAll } = require("hast-util-select");
-const { SKIP, visit } = require("unist-util-visit");
+import { selectAll } from "hast-util-select";
+import { SKIP, visit } from "unist-util-visit";
 
 /**
  * wraps tables with a .table-container div
  */
-module.exports = function rehypeWrapTables() {
+export default function rehypeWrapTables() {
   return (tree) => {
     visit(
       tree,
@@ -32,4 +32,4 @@ module.exports = function rehypeWrapTables() {
       },
     );
   };
-};
+}

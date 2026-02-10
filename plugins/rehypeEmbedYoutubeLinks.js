@@ -1,4 +1,4 @@
-const { visit } = require("unist-util-visit");
+import { visit } from "unist-util-visit";
 
 const YOUTUBE_ID_REGEX =
   /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi;
@@ -18,7 +18,7 @@ const YOUTUBE_ID_REGEX =
  * [![Build with Pear - Episode 01: Developing with Pear](https://img.youtube.com/vi/y2G97xz78gU/0.jpg)](https://www.youtube.com/watch?v=y2G97xz78gU)
  * ```
  */
-module.exports = function rehypeEmbedYoutubeLinks() {
+export default function rehypeEmbedYoutubeLinks() {
   return (tree) => {
     visit(
       tree,
@@ -47,4 +47,4 @@ module.exports = function rehypeEmbedYoutubeLinks() {
       },
     );
   };
-};
+}
