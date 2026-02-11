@@ -12,9 +12,9 @@
   },
   "exports": {
     ".": {
-      "default": "./index.js",
-      "rehypeConvertRelativePaths": "./plugins/rehypeConvertRelativePaths.js"
+      "default": "./index.js"
     },
+    "./plugins/*": "./plugins/*",
     "./package": "./package.json"
   },
   "imports": {

@@ -14,7 +14,7 @@ assert(result, `<h1 id="user-content-hello-world">Hello World</h1>`);
 
 ```js
 const { remarkPear } = require("pear-md");
-const { unified } = require("unified", { with: { imports: "./package.json" } });
+const { unified } = require("unified");
 
 const processor = unified().use(remarkPear);
 

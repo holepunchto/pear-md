@@ -7,17 +7,14 @@ import rehypeSanitize from "rehype-sanitize";
 import { defaultSchema } from "rehype-sanitize";
 import rehypeSlug from "rehype-slug";
 import rehypeFormat from "rehype-format";
-import rehypePrettyCode from "rehype-pretty-code" with {
-  imports: "./package.json",
-};
-import { unified } from "unified" with { imports: "./package.json" };
-import rehypeEmbedYoutubeLinks from "./plugins/rehypeEmbedYoutubeLinks";
-import rehypeConvertLocalMarkdownLinks from "./plugins/rehypeConvertLocalMarkdownLinks";
-import rehypeConvertRelativePaths from "./plugins/rehypeConvertRelativePaths";
-import rehypeNameHeadings from "./plugins/rehypeNameHeadings";
-import rehypeSanitizeMarkStyles from "./plugins/rehypeSanitizeMarkStyles";
-import rehypeWrapTables from "./plugins/rehypeWrapTables";
-import rehypeHeadingLinks from "./plugins/rehypeHeadingLinks";
+import rehypePrettyCode from "rehype-pretty-code";
+import { unified } from "unified";
+import rehypeEmbedYoutubeLinks from "./plugins/rehypeEmbedYoutubeLinks.js";
+import rehypeConvertLocalMarkdownLinks from "./plugins/rehypeConvertLocalMarkdownLinks.js";
+import rehypeNameHeadings from "./plugins/rehypeNameHeadings.js";
+import rehypeSanitizeMarkStyles from "./plugins/rehypeSanitizeMarkStyles.js";
+import rehypeWrapTables from "./plugins/rehypeWrapTables.js";
+import rehypeHeadingLinks from "./plugins/rehypeHeadingLinks.js";
 
 const schema = JSON.parse(JSON.stringify(defaultSchema));
 if (!schema.attributes) schema.attributes = {};
@@ -37,13 +34,6 @@ if (!schema.tagNames) schema.tagNames = [];
 schema.tagNames.push("mark");
 schema.tagNames.push("iframe");
 
-/**
- * Wraps headings in a section/nests sections according to their heading depth
- * @param {object} opts
- * @param {boolean} [opts.addHeadingLinks]
- * @param {string} [opts.root]
- * @param {(string) => string} [opts.linkMapper]
- */
 export const remarkPearPreset = {
   plugins: [
     remarkParse,
@@ -79,15 +69,9 @@ export const remarkPearPreset = {
 /**
  * Converts a markdown string to an html string
  * @param {string} input
- * @param {object} opts
- * @param {boolean} [opts.addHeadingLinks]
- * @param {string} [opts.root]
- * @param {(string) => string} [opts.linkMapper]
  */
-export async function markdownToHtml(input, opts) {
+export async function markdownToHtml(input) {
   const processor = unified();
-  processor.use(remarkParse).use(remarkPearPreset, opts).use(rehypeStringify);
+  processor.use(remarkParse).use(remarkPearPreset).use(rehypeStringify);
   return `${await processor.process(input)}`.trim();
 }
-
-export { rehypeConvertRelativePaths };

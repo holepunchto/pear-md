@@ -1,4 +1,4 @@
-import path from "bare-path";
+import path from "path";
 import { visit } from "unist-util-visit";
 
 const URL_ATTRIBUTES = ["src", "srcSet", "href"];
