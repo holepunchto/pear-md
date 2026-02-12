@@ -4,6 +4,16 @@ import { markdownToHtml } from "../index.js" with {
   imports: "../package.json",
 };
 
+test("markdownToHtml: hello world", async function (t) {
+  const markdown = `# Hello World`;
+  const result = await markdownToHtml(markdown);
+
+  t.is(
+    result,
+    `<h1 id="user-content-hello-world"><a data-heading-link href="#hello-world">#</a>Hello World</h1>`,
+  );
+});
+
 test("markdownToHtml: name headings and add headling links", async function (t) {
   const markdown = `
 # Test-1<a name="one"></a>
