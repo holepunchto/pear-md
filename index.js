@@ -30,9 +30,26 @@ if (!schema.attributes.iframe) schema.attributes.iframe = [];
 schema.attributes.iframe.push("src");
 schema.attributes.iframe.push("allow");
 schema.attributes.iframe.push("referrerpolicy");
+schema.attributes.iframe.push("className");
+if (!schema.attributes.figure) schema.attributes.figure = [];
+schema.attributes.figure.push("data-rehype-pretty-code-figure");
+if (!schema.attributes.pre) schema.attributes.pre = [];
+schema.attributes.pre.push("style");
+schema.attributes.pre.push("data-language");
+schema.attributes.pre.push("data-theme");
+schema.attributes.pre.push("tabindex");
+if (!schema.attributes.code) schema.attributes.code = [];
+schema.attributes.code.push("style");
+schema.attributes.code.push("data-language");
+schema.attributes.code.push("data-theme");
+if (!schema.attributes.span) schema.attributes.span = [];
+schema.attributes.span.push("data-rehype-pretty-code-figure");
+schema.attributes.span.push("data-line");
+schema.attributes.span.push("style");
 if (!schema.tagNames) schema.tagNames = [];
 schema.tagNames.push("mark");
 schema.tagNames.push("iframe");
+schema.tagNames.push("figure");
 
 export const remarkPearPreset = {
   plugins: [
