@@ -8,6 +8,7 @@ const URL_ATTRIBUTES = ["src", "srcSet", "href"];
  * (but NOT absolute urls/keep host omitted)
  * @param {object} opts
  * @param {string} opts.root
+ * @param {{[prefix: string]: string}} opts.replace
  */
 export default function rehypeConvertRelativePaths(opts = {}) {
   const { root } = opts;
@@ -22,7 +23,16 @@ export default function rehypeConvertRelativePaths(opts = {}) {
             !URL.parse(node.properties[k]) &&
             !node.properties[k].startsWith("#")
           ) {
-            node.properties[k] = path.resolve(root, node.properties[k]);
+            let newPath = path.resolve(root, node.properties[k]);
+            if (opts.replace) {
+              for (const [key, value] of Object.entries(opts.replace)) {
+                newPath = newPath.replace(
+                  new RegExp(`^${RegExp.escape(key)}`),
+                  value,
+                );
+              }
+            }
+            node.properties[k] = newPath;
           }
         });
       },
