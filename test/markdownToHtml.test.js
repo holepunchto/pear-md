@@ -4,7 +4,7 @@ import { markdownToHtml } from "../index.js" with {
   imports: "../package.json",
 };
 
-test("name headings and add headling links", async function (t) {
+test("markdownToHtml: name headings and add headling links", async function (t) {
   const markdown = `
 # Test-1<a name="one"></a>
 
@@ -20,7 +20,7 @@ test("name headings and add headling links", async function (t) {
   );
 });
 
-test("add heading links", async function (t) {
+test("markdownToHtml: add heading links", async function (t) {
   const markdown = `
 # Test-1<a name="one"></a>
 
@@ -39,7 +39,7 @@ test("add heading links", async function (t) {
   );
 });
 
-test("embed youtube", async function (t) {
+test("markdownToHtml: embed youtube", async function (t) {
   const markdown = `
 [![Build with Pear - Episode 01: Developing with Pear](https://img.youtube.com/vi/y2G97xz78gU/0.jpg)](https://www.youtube.com/watch?v=y2G97xz78gU)
 `;
@@ -55,7 +55,7 @@ test("embed youtube", async function (t) {
   );
 });
 
-test("wrap tables", async function (t) {
+test("markdownToHtml: wrap tables", async function (t) {
   const markdown = `\
 |       |       |       |       |       |
 | :---: | :---: | :---: | :---: | :---: |
@@ -88,7 +88,7 @@ test("wrap tables", async function (t) {
   );
 });
 
-test("sanitize mark styles", async function (t) {
+test("markdownToHtml: sanitize mark styles", async function (t) {
   const markdown = `<mark style="background-color: #80ff80; color: red">**stable**</mark>`;
   const result = await markdownToHtml(markdown);
   t.is(
@@ -97,7 +97,7 @@ test("sanitize mark styles", async function (t) {
   );
 });
 
-test("drop scripts", async function (t) {
+test("markdownToHtml: drop scripts", async function (t) {
   const markdown = `\
 # Test
 

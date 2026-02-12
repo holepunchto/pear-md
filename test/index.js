@@ -7,7 +7,7 @@ async function runTests () {
 
   test.pause()
 
-  await import('./index.test.js')
+  await import('./markdownToHtml.test.js')
 
   test.resume()
 }
