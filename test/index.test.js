@@ -54,3 +54,36 @@ test("embed youtube", async function (t) {
 </p>`,
   );
 });
+
+test("wrap tables", async function (t) {
+  const markdown = `\
+|       |       |       |       |       |
+| :---: | :---: | :---: | :---: | :---: |
+| <a href="https://keet.io" data-pear="pear://keet" title="Encrypted peer-to-peer message, audio & video chat"><img src="assets/keet.svg" alt="Encrypted peer-to-peer message, audio & video chat"></a> | <a href="https://pass.pears.com" data-pear="pear://pass" title="Secure peer-to-peer password & secrets manager"><img src="assets/pearpass.svg" alt="Secure peer-to-peer password & secrets manager"></a> | &nbsp; | &nbsp; | &nbsp; |
+| <a href="https://keet.io" data-pear="pear://keet" title="Encrypted peer-to-peer message, audio & video chat"><strong>Keet</strong></a> | <a href="https://pass.pears.com" data-pear="pear://pass" title="Secure peer-to-peer password & secrets manager"><strong>PearPass</strong></a> | &nbsp; | &nbsp; | &nbsp; |`;
+  const result = await markdownToHtml(markdown);
+  t.is(
+    result,
+    `\
+<div class="table-container">
+  <table>
+    <tbody>
+      <tr>
+        <td align="center"><a href="https://keet.io" data-pear="pear://keet" title="Encrypted peer-to-peer message, audio &#x26; video chat"><img src="assets/keet.svg" alt="Encrypted peer-to-peer message, audio &#x26; video chat"></a></td>
+        <td align="center"><a href="https://pass.pears.com" data-pear="pear://pass" title="Secure peer-to-peer password &#x26; secrets manager"><img src="assets/pearpass.svg" alt="Secure peer-to-peer password &#x26; secrets manager"></a></td>
+        <td align="center"> </td>
+        <td align="center"> </td>
+        <td align="center"> </td>
+      </tr>
+      <tr>
+        <td align="center"><a href="https://keet.io" data-pear="pear://keet" title="Encrypted peer-to-peer message, audio &#x26; video chat"><strong>Keet</strong></a></td>
+        <td align="center"><a href="https://pass.pears.com" data-pear="pear://pass" title="Secure peer-to-peer password &#x26; secrets manager"><strong>PearPass</strong></a></td>
+        <td align="center"> </td>
+        <td align="center"> </td>
+        <td align="center"> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+  );
+});
