@@ -35,14 +35,24 @@ export default function rehypeEmbedYoutubeLinks() {
         const result = YOUTUBE_ID_REGEX.exec(node.properties.href);
         parent.children[i] = {
           type: "element",
-          tagName: "iframe",
+          tagName: "div",
           properties: {
-            title: "Youtube video player",
-            src: `https://www.youtube-nocookie.com/embed/${result[1]}?rel=0`,
-            allow:
-              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;",
-            referrerpolicy: "strict-origin-when-cross-origin",
+            className: "youtube-video-player",
           },
+          children: [
+            {
+              type: "element",
+              tagName: "iframe",
+              properties: {
+                title: "Youtube video player",
+                className: "youtube-video-player__video",
+                src: `https://www.youtube-nocookie.com/embed/${result[1]}?rel=0`,
+                allow:
+                  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;",
+                referrerpolicy: "strict-origin-when-cross-origin",
+              },
+            },
+          ],
         };
       },
     );
