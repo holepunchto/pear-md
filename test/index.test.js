@@ -96,3 +96,15 @@ test("sanitize mark styles", async function (t) {
     `<p><mark style="background-color: #80ff80;"><strong>stable</strong></mark></p>`,
   );
 });
+
+test("drop scripts", async function (t) {
+  const markdown = `\
+# Test
+
+<script>alert("HI")</script>`;
+  const result = await markdownToHtml(markdown);
+  t.is(
+    result,
+    `<h1 id="user-content-test"><a data-heading-link href="#test">#</a>Test</h1>`,
+  );
+});
