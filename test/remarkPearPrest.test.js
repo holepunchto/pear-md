@@ -1,5 +1,5 @@
 import test from "brittle"; // https://github.com/holepunchto/brittle
-import { unified } from "unified" with { imports: "../package.json" };
+import { unified } from "unified";
 import { remarkPearPreset } from "../index.js";
 
 test("rehypeConvertRelativePaths: converts relative paths to absolute paths", async function (t) {

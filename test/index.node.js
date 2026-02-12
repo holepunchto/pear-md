@@ -1,0 +1,13 @@
+runTests();
+
+async function runTests() {
+  const test = (await import("brittle")).default;
+
+  test.pause();
+
+  await import("./markdownToHtml.test.js");
+  await import("./rehypeConvertRelativePaths.test.js");
+  await import("./remarkPearPrest.test.js");
+
+  test.resume();
+}

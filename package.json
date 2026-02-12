@@ -7,8 +7,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "bare test/index.js",
-    "test:gen": "brittle -r test/index.js test/*.test.js"
+    "test": "npm run test:node && npm run test:bare",
+    "test:node": "node test/index.node.js",
+    "test:bare": "bare test/index.bare.js"
   },
   "exports": {
     ".": {

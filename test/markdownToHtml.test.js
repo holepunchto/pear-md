@@ -1,8 +1,6 @@
 import test from "brittle"; // https://github.com/holepunchto/brittle
 
-import { markdownToHtml } from "../index.js" with {
-  imports: "../package.json",
-};
+import { markdownToHtml } from "../index.js";
 
 test("markdownToHtml: hello world", async function (t) {
   const markdown = `# Hello World`;
