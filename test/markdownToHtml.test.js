@@ -116,3 +116,23 @@ test("markdownToHtml: drop scripts", async function (t) {
     `<h1 id="user-content-test"><a data-heading-link href="#test">#</a>Test</h1>`,
   );
 });
+
+test("markdownToHtml: renames local markdown links", async function (t) {
+  const markdown = `
+- [link-to-local-page](page.md)
+- [link-to-remote-markdown](https://example.com/doc.md)
+- [link-to-header](#local)
+- [link-to-pdf](doc.pdf)
+`;
+  const result = await markdownToHtml(markdown);
+  t.is(
+    result,
+    `\
+<ul>
+  <li><a href="page.html">link-to-local-page</a></li>
+  <li><a href="https://example.com/doc.md">link-to-remote-markdown</a></li>
+  <li><a href="#local">link-to-header</a></li>
+  <li><a href="doc.pdf">link-to-pdf</a></li>
+</ul>`,
+  );
+});
