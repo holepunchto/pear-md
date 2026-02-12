@@ -9,6 +9,7 @@ async function runTests () {
 
   await import('./markdownToHtml.test.js')
   await import('./rehypeConvertRelativePaths.test.js')
+  await import('./remarkPearPrest.test.js')
 
   test.resume()
 }
