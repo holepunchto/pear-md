@@ -87,3 +87,12 @@ test("wrap tables", async function (t) {
 </div>`,
   );
 });
+
+test("sanitize mark styles", async function (t) {
+  const markdown = `<mark style="background-color: #80ff80; color: red">**stable**</mark>`;
+  const result = await markdownToHtml(markdown);
+  t.is(
+    result,
+    `<p><mark style="background-color: #80ff80;"><strong>stable</strong></mark></p>`,
+  );
+});
