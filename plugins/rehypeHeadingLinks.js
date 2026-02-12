@@ -12,14 +12,13 @@ export default function rehypeHeadingLinks() {
       tree,
       (node) => headingRank(node),
       (heading, index, parent) => {
-        parent.children[index] = h("div.heading-link", [
+        heading.children.unshift(
           h(
             "a",
-            { href: `#${heading.properties.id}` },
-            h(heading.tagName, "#"),
+            { dataHeadingLink: true, href: `#${heading.properties.id}` },
+            h("text", "#"),
           ),
-          heading,
-        ]);
+        );
         return SKIP;
       },
     );
