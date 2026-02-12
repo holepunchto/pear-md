@@ -8,6 +8,7 @@ async function runTests () {
   test.pause()
 
   await import('./markdownToHtml.test.js')
+  await import('./rehypeConvertRelativePaths.test.js')
 
   test.resume()
 }
