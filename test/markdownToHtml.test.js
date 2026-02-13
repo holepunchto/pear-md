@@ -8,7 +8,7 @@ test("markdownToHtml: hello world", async function (t) {
 
   t.is(
     result,
-    `<h1 id="user-content-hello-world"><a data-heading-link href="#hello-world">#</a>Hello World</h1>`,
+    /* html */ `<h1 id="user-content-hello-world"><a data-heading-link href="#hello-world">#</a>Hello World</h1>`,
   );
 });
 
@@ -22,7 +22,7 @@ test("markdownToHtml: name headings and add headling links", async function (t) 
 
   t.is(
     result,
-    `\
+    /* html */ `\
 <h1 id="user-content-one"><a data-heading-link href="#one">#</a>Test-1</h1>
 <h2 id="user-content-two"><a data-heading-link href="#two">#</a>Two</h2>`,
   );
@@ -40,7 +40,7 @@ test("markdownToHtml: add heading links", async function (t) {
 
   t.is(
     result,
-    `\
+    /* html */ `\
 <h1 id="user-content-one"><a data-heading-link href="#one">#</a>Test-1</h1>
 <h2 id="user-content-two"><a data-heading-link href="#two">#</a>Two</h2>
 <h2 id="user-content-two-1"><a data-heading-link href="#two-1">#</a>Two</h2>`,
@@ -54,7 +54,7 @@ test("markdownToHtml: embed youtube", async function (t) {
   const result = await markdownToHtml(markdown);
   t.is(
     result,
-    `\
+    /* html */ `\
 <p>
   <div class="youtube-video-player">
     <iframe title="Youtube video player" class="youtube-video-player__video" src="https://www.youtube-nocookie.com/embed/y2G97xz78gU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -72,7 +72,7 @@ test("markdownToHtml: wrap tables", async function (t) {
   const result = await markdownToHtml(markdown);
   t.is(
     result,
-    `\
+    /* html */ `\
 <div class="table-container">
   <table>
     <tbody>
@@ -101,7 +101,7 @@ test("markdownToHtml: sanitize mark styles", async function (t) {
   const result = await markdownToHtml(markdown);
   t.is(
     result,
-    `<p><mark style="background-color: #80ff80;"><strong>stable</strong></mark></p>`,
+    /* html */ `<p><mark style="background-color: #80ff80;"><strong>stable</strong></mark></p>`,
   );
 });
 
@@ -120,6 +120,8 @@ test("markdownToHtml: drop scripts", async function (t) {
 test("markdownToHtml: renames local markdown links", async function (t) {
   const markdown = `
 - [link-to-local-page](page.md)
+- [link-to-local-page-with-anchor](./page.md#anchor)
+- [link-to-local-page-with-anchor-and-query](./page.md?query=1#anchor)
 - [link-to-remote-markdown](https://example.com/doc.md)
 - [link-to-header](#local)
 - [link-to-pdf](doc.pdf)
@@ -127,9 +129,11 @@ test("markdownToHtml: renames local markdown links", async function (t) {
   const result = await markdownToHtml(markdown);
   t.is(
     result,
-    `\
+    /* html */ `\
 <ul>
   <li><a href="page.html">link-to-local-page</a></li>
+  <li><a href="page.html#anchor">link-to-local-page-with-anchor</a></li>
+  <li><a href="page.html?query=1#anchor">link-to-local-page-with-anchor-and-query</a></li>
   <li><a href="https://example.com/doc.md">link-to-remote-markdown</a></li>
   <li><a href="#local">link-to-header</a></li>
   <li><a href="doc.pdf">link-to-pdf</a></li>

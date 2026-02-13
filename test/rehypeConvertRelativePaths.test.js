@@ -26,6 +26,7 @@ test("rehypeConvertRelativePaths: advanced example", async function (t) {
 - [home](README.html)
 - [home-with-anchor-link](README.html#anchor-test)
 - [absolute-link-with-anchor-link](/blah/README.html#anchor-test)
+- [home-with-anchor-link-and-query](README.html?query=1#anchor-test)
 - [non-replaced-link](blah/README.html)
 `;
 
@@ -43,12 +44,13 @@ test("rehypeConvertRelativePaths: advanced example", async function (t) {
   const result = `${await contentProcessor.process(markdown)}`;
   t.is(
     result,
-    `\
+    /* html */ `\
 <ul>
 <li><a href="/sample-root/sample.pdf">pdf</a></li>
 <li><a href="/sample-root/index.html">home</a></li>
 <li><a href="/sample-root/index.html#anchor-test">home-with-anchor-link</a></li>
 <li><a href="/blah/README.html#anchor-test">absolute-link-with-anchor-link</a></li>
+<li><a href="/sample-root/index.html?query=1#anchor-test">home-with-anchor-link-and-query</a></li>
 <li><a href="/sample-root/blah/README.html">non-replaced-link</a></li>
 </ul>`,
   );

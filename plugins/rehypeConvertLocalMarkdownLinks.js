@@ -10,14 +10,21 @@ export default function rehypeConvertLocalMarkdownLinks() {
         node.tagName === "a" &&
         node.properties.href &&
         !URL.parse(node.properties.href) &&
-        node.properties.href.endsWith(".md"),
+        /\.md/.test(node.properties.href),
       (node) => {
-        const dirname = path.dirname(node.properties.href);
-        const basename = path.basename(node.properties.href);
+        const dummyURL = URL.parse(`http://./${node.properties.href}`);
+        let href = path.relative(
+          "/",
+          dummyURL.pathname.replace(/\.md$/, ".html"),
+        );
+        if (dummyURL.search) {
+          href = `${href}${dummyURL.search}`;
+        }
+        if (dummyURL.hash) {
+          href = `${href}${dummyURL.hash}`;
+        }
 
-        node.properties.href = path
-          .join(dirname, basename)
-          .replace(/\.md$/, ".html");
+        node.properties.href = href;
       },
     );
   };
