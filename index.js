@@ -22,6 +22,7 @@ schema.attributes.div.push("className");
 if (!schema.attributes.a) schema.attributes.a = [];
 schema.attributes.a.push("dataPear");
 schema.attributes.a.push("dataHeadingLink");
+schema.attributes.a.push("dataSrc");
 if (!schema.attributes.aside) schema.attributes.aside = [];
 schema.attributes.aside.push("className");
 if (!schema.attributes.mark) schema.attributes.mark = [];

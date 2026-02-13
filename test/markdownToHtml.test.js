@@ -131,9 +131,9 @@ test("markdownToHtml: renames local markdown links", async function (t) {
     result,
     /* html */ `\
 <ul>
-  <li><a href="page.html">link-to-local-page</a></li>
-  <li><a href="page.html#anchor">link-to-local-page-with-anchor</a></li>
-  <li><a href="page.html?query=1#anchor">link-to-local-page-with-anchor-and-query</a></li>
+  <li><a href="page.html" data-src="page.md">link-to-local-page</a></li>
+  <li><a href="page.html#anchor" data-src="page.md">link-to-local-page-with-anchor</a></li>
+  <li><a href="page.html?query=1#anchor" data-src="page.md">link-to-local-page-with-anchor-and-query</a></li>
   <li><a href="https://example.com/doc.md">link-to-remote-markdown</a></li>
   <li><a href="#local">link-to-header</a></li>
   <li><a href="doc.pdf">link-to-pdf</a></li>

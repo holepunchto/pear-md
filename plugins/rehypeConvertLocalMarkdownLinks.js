@@ -24,6 +24,7 @@ export default function rehypeConvertLocalMarkdownLinks() {
           href = `${href}${dummyURL.hash}`;
         }
 
+        node.properties.dataSrc = path.relative("/", dummyURL.pathname);
         node.properties.href = href;
       },
     );
