@@ -27,7 +27,9 @@ export default function rehypeConvertRelativePaths(opts = {}) {
             if (opts.replace) {
               for (const [key, value] of Object.entries(opts.replace)) {
                 newPath = newPath.replace(
-                  new RegExp(`^${RegExp.escape(key)}`),
+                  new RegExp(
+                    `^${key.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&")}`,
+                  ),
                   value,
                 );
               }
