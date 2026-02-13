@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Node/NPM
+        uses: actions/setup-node@v6
+      - name: Install bare
+        run: |
+          npm install -g bare
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Run Tests
+        run: |
+          npm run test
